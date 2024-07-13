@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
 
-import { Foo } from '@/features/Foo';
+import IconAdd from '@/assets/icons/icon-add.svg';
 
 export const Route = createFileRoute('/')({
   component: HomeComponent,
@@ -9,9 +9,11 @@ export const Route = createFileRoute('/')({
 function HomeComponent() {
 
   return (
-    <h1>
-      <Foo />
-      <div>Welcome Home!</div>
-    </h1>
+    <>
+      <div className={'flex items-center justify-between bg-red-500 px-4 py-3'}>
+        <h3 className={'text-2xl'}>암기 목록</h3>
+        <IconAdd />
+      </div>
+    </>
   );
 }
