@@ -4,7 +4,7 @@ import type { PropsWithChildren } from 'react';
 
 import { useRadioThemeContext } from '@/shared/ui/Radio';
 
-const Variants = cva(`cursor-pointer rounded-2xl px-3 py-1.5 text-[15px]`, {
+const Variants = cva(`cursor-pointer rounded-full px-4 py-2 text-[15px] transition-all`, {
   variants: {
     checked: {
       true: 'bg-primary font-semibold text-white',
