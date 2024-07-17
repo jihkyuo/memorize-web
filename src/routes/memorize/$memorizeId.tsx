@@ -8,14 +8,14 @@ type SectionType = 'main-text' | 'record';
 
 export const Route = createFileRoute('/memorize/$memorizeId')({
   component: MemorizeDetail,
-  beforeLoad: (ctx) => {
+  beforeLoad: ctx => {
     const isCorrect = ctx.location.pathname.includes('main-text') || ctx.location.pathname.includes('record');
-    if(!isCorrect) {
+    if (!isCorrect) {
       throw redirect({
-        to: `/${Route.to}/${'main-text'}`
+        to: `/${Route.to}/${'main-text'}`,
       });
     }
-  }
+  },
 });
 
 function MemorizeDetail() {
@@ -36,7 +36,7 @@ function MemorizeDetail() {
       label: '녹음 목록',
     },
   ];
-  
+
   const handleChangeSection = (section: SectionType) => {
     setSection(section);
     // issue Route.to 사용법이 문서 가이드에 권유되나, HMR 작동 시, undefiend로 변경되는 이슈가 있음(위험)
@@ -48,7 +48,11 @@ function MemorizeDetail() {
   return (
     <>
       <Header title={'제목'} navOption={{ type: 'back', onClick: () => history.back() }} />
-      <Tabs value={section} items={items} onChange={e => handleChangeSection(e.target.value as SectionType)} />
+      <Tabs
+        value={section}
+        items={items}
+        onChange={e => handleChangeSection(e.target.value as SectionType)}
+        isDivideLine/>
       <Outlet />
     </>
   );

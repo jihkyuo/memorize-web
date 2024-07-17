@@ -13,15 +13,22 @@ interface TabsProps<TValue extends string> extends InputHTMLAttributes<HTMLInput
   value?: TValue;
   items: TabItemProps<TValue>[];
   disabled?: boolean;
+  isDivideLine?: boolean;
 }
 
-export function Tabs<TValue extends string>({ value, items, disabled, ...inputProps }: TabsProps<TValue>) {
+export function Tabs<TValue extends string>({
+  value,
+  items,
+  disabled,
+  isDivideLine,
+  ...inputProps
+}: TabsProps<TValue>) {
   const checkedIndex = items.findIndex(item => item.value === value);
   const widthRatio = (1 / items.length) * 100;
   const translateRatio = checkedIndex * 100;
 
   return (
-    <div className={'relative flex py-4'}>
+    <div className={`relative flex py-4 ${isDivideLine ? 'border-b-2' : ''}`}>
       <TabSlide widthRatio={widthRatio} translateRatio={translateRatio} />
       {items.map(item => (
         <Tab
