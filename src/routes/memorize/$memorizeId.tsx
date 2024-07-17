@@ -36,10 +36,13 @@ function MemorizeDetail() {
       label: '녹음 목록',
     },
   ];
-
+  
   const handleChangeSection = (section: SectionType) => {
     setSection(section);
-    navigate({ to: `/${Route.to}/${section}` });
+    // issue Route.to 사용법이 문서 가이드에 권유되나, HMR 작동 시, undefiend로 변경되는 이슈가 있음(위험)
+    // reference : https://github.com/TanStack/router/issues/1640
+    // navigate({ to: `/${Route.to}/${section}` });
+    navigate({ to: `/memorize/$memorizeId/${section}` });
   };
 
   return (
