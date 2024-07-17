@@ -19,6 +19,7 @@ import { Route as RecordRecordIdImport } from './routes/record/$recordId'
 import { Route as MemorizeMemorizeIdImport } from './routes/memorize/$memorizeId'
 import { Route as MemorizeMemorizeIdRecordImport } from './routes/memorize/$memorizeId/record'
 import { Route as MemorizeMemorizeIdMainTextImport } from './routes/memorize/$memorizeId/main-text'
+import { Route as MemorizeMemorizeIdRecordRecordIdImport } from './routes/memorize/$memorizeId/record_.$recordId'
 
 // Create/Update Routes
 
@@ -63,6 +64,12 @@ const MemorizeMemorizeIdMainTextRoute = MemorizeMemorizeIdMainTextImport.update(
     getParentRoute: () => MemorizeMemorizeIdRoute,
   } as any,
 )
+
+const MemorizeMemorizeIdRecordRecordIdRoute =
+  MemorizeMemorizeIdRecordRecordIdImport.update({
+    path: '/record/$recordId',
+    getParentRoute: () => MemorizeMemorizeIdRoute,
+  } as any)
 
 // Populate the FileRoutesByPath interface
 
@@ -124,6 +131,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MemorizeMemorizeIdRecordImport
       parentRoute: typeof MemorizeMemorizeIdImport
     }
+    '/memorize/$memorizeId/record/$recordId': {
+      id: '/memorize/$memorizeId/record/$recordId'
+      path: '/record/$recordId'
+      fullPath: '/memorize/$memorizeId/record/$recordId'
+      preLoaderRoute: typeof MemorizeMemorizeIdRecordRecordIdImport
+      parentRoute: typeof MemorizeMemorizeIdImport
+    }
   }
 }
 
@@ -135,6 +149,7 @@ export const routeTree = rootRoute.addChildren({
   MemorizeMemorizeIdRoute: MemorizeMemorizeIdRoute.addChildren({
     MemorizeMemorizeIdMainTextRoute,
     MemorizeMemorizeIdRecordRoute,
+    MemorizeMemorizeIdRecordRecordIdRoute,
   }),
   RecordRecordIdRoute,
   RecordIndexRoute,
@@ -169,7 +184,8 @@ export const routeTree = rootRoute.addChildren({
       "filePath": "memorize/$memorizeId.tsx",
       "children": [
         "/memorize/$memorizeId/main-text",
-        "/memorize/$memorizeId/record"
+        "/memorize/$memorizeId/record",
+        "/memorize/$memorizeId/record/$recordId"
       ]
     },
     "/record/$recordId": {
@@ -184,6 +200,10 @@ export const routeTree = rootRoute.addChildren({
     },
     "/memorize/$memorizeId/record": {
       "filePath": "memorize/$memorizeId/record.tsx",
+      "parent": "/memorize/$memorizeId"
+    },
+    "/memorize/$memorizeId/record/$recordId": {
+      "filePath": "memorize/$memorizeId/record_.$recordId.tsx",
       "parent": "/memorize/$memorizeId"
     }
   }

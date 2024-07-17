@@ -21,6 +21,7 @@ export const Route = createFileRoute('/memorize/$memorizeId')({
 function MemorizeDetail() {
   const navigate = Route.useNavigate();
   const location = useLocation();
+  const match = Route.useMatch();
   const lastSegment = location.pathname.split('/').pop() as SectionType;
 
   const [ section, setSection ] = useState<SectionType>(lastSegment);
@@ -38,20 +39,26 @@ function MemorizeDetail() {
 
   const handleChangeSection = (section: SectionType) => {
     setSection(section);
-    // issue Route.to 사용법이 문서 가이드에 권유되나, HMR 작동 시, undefiend로 변경되는 이슈가 있음(위험)
+    // issue Route.to 사용법이 문서 가이드에 권유되나, 여기에서처럼 자기 자신의 url에서 Route.to는 HMR 작동 시, undefiend로 변경되는 이슈가 있음(위험)
     // reference : https://github.com/TanStack/router/issues/1640
     // navigate({ to: `/${Route.to}/${section}` });
     navigate({ to: `/memorize/$memorizeId/${section}` });
   };
 
+  const isRecordDetail = !!match.params.recordId;
+
   return (
     <>
-      <Header title={'제목'} navOption={{ type: 'back', onClick: () => navigate({ to: '/' }) }} />
-      <Tabs
-        value={section}
-        items={items}
-        onChange={e => handleChangeSection(e.target.value as SectionType)}
-        isDivideLine/>
+      {!isRecordDetail && (
+        <>
+          <Header title={'제목'} navOption={{ type: 'back', onClick: () => navigate({ to: '/' }) }} />
+          <Tabs
+            value={section}
+            items={items}
+            onChange={e => handleChangeSection(e.target.value as SectionType)}
+            isDivideLine/>
+        </>
+      )}
       <Outlet />
     </>
   );

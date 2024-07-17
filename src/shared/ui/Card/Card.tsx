@@ -9,7 +9,7 @@ export function Card({ onClick, children }: Props) {
     <div
       onClick={onClick}
       className={
-        'shadow-custom flex cursor-pointer items-center space-x-4 rounded-2xl border-[0.5px] border-[#0000001A] px-6 py-4'
+        'shadow-custom flex cursor-pointer items-center space-x-4 rounded-2xl border-[0.5px] border-[#0000001A] bg-white px-6 py-4'
       }>
       {children}
     </div>
