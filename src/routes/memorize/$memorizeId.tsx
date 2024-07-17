@@ -1,4 +1,4 @@
-import { createFileRoute, Outlet, redirect, useLocation, useRouter } from '@tanstack/react-router';
+import { createFileRoute, Outlet, redirect, useLocation } from '@tanstack/react-router';
 import { useState } from 'react';
 
 import { Header } from '@/shared/ui/Header/Header';
@@ -19,7 +19,6 @@ export const Route = createFileRoute('/memorize/$memorizeId')({
 });
 
 function MemorizeDetail() {
-  const { history } = useRouter();
   const navigate = Route.useNavigate();
   const location = useLocation();
   const lastSegment = location.pathname.split('/').pop() as SectionType;
@@ -47,7 +46,7 @@ function MemorizeDetail() {
 
   return (
     <>
-      <Header title={'제목'} navOption={{ type: 'back', onClick: () => history.back() }} />
+      <Header title={'제목'} navOption={{ type: 'back', onClick: () => navigate({ to: '/' }) }} />
       <Tabs
         value={section}
         items={items}
