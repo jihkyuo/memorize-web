@@ -1,4 +1,5 @@
 import type { ReactNode } from '@tanstack/react-router';
+import { twMerge } from 'tailwind-merge';
 
 import IconArrowLeft from '@/assets/icons/icon-arrow-left.svg';
 
@@ -10,6 +11,7 @@ interface Props {
     type: 'back'; // close type 등 추가 가능
     onClick?: () => void;
   };
+  className?: string;
 }
 
 const NavRecord = {
@@ -17,9 +19,9 @@ const NavRecord = {
   // close type 등 추가 가능...
 };
 
-export function Header({ title, left, extra, navOption }: Props) {
+export function Header({ title, left, extra, navOption, className }: Props) {
   return (
-    <div className={'px-6 py-4'}>
+    <div className={twMerge('px-6 py-4', className)}>
       <div className={'relative flex'}>
         <div className={'absolute left-0 top-0 flex h-full items-center space-x-3'}>
           <div className={'cursor-pointer'}>{navOption && NavRecord[navOption.type](navOption.onClick)}</div>
