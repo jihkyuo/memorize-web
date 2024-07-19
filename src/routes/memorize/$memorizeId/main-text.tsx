@@ -11,7 +11,7 @@ export const Route = createFileRoute('/memorize/$memorizeId/main-text')({
 });
 
 function MainText() {
-  const { memorizeId } = Route.useParams();
+  // const { memorizeId } = Route.useParams();
   // todo memorizeId로 해당 상세 페이지의 data를 가져와 tanstack router context를 이용해보기
 
   return (

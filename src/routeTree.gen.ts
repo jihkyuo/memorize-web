@@ -11,7 +11,6 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as AboutImport } from './routes/about'
 import { Route as AuthImport } from './routes/_auth'
 import { Route as IndexImport } from './routes/index'
 import { Route as RecordIndexImport } from './routes/record/index'
@@ -22,11 +21,6 @@ import { Route as MemorizeMemorizeIdMainTextImport } from './routes/memorize/$me
 import { Route as MemorizeMemorizeIdRecordRecordIdImport } from './routes/memorize/$memorizeId/record_.$recordId'
 
 // Create/Update Routes
-
-const AboutRoute = AboutImport.update({
-  path: '/about',
-  getParentRoute: () => rootRoute,
-} as any)
 
 const AuthRoute = AuthImport.update({
   id: '/_auth',
@@ -89,13 +83,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthImport
       parentRoute: typeof rootRoute
     }
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutImport
-      parentRoute: typeof rootRoute
-    }
     '/memorize/$memorizeId': {
       id: '/memorize/$memorizeId'
       path: '/memorize/$memorizeId'
@@ -145,7 +132,6 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren({
   IndexRoute,
-  AboutRoute,
   MemorizeMemorizeIdRoute: MemorizeMemorizeIdRoute.addChildren({
     MemorizeMemorizeIdMainTextRoute,
     MemorizeMemorizeIdRecordRoute,
@@ -165,7 +151,6 @@ export const routeTree = rootRoute.addChildren({
       "children": [
         "/",
         "/_auth",
-        "/about",
         "/memorize/$memorizeId",
         "/record/$recordId",
         "/record/"
@@ -176,9 +161,6 @@ export const routeTree = rootRoute.addChildren({
     },
     "/_auth": {
       "filePath": "_auth.tsx"
-    },
-    "/about": {
-      "filePath": "about.tsx"
     },
     "/memorize/$memorizeId": {
       "filePath": "memorize/$memorizeId.tsx",

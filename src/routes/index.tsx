@@ -1,6 +1,8 @@
+import { useSuspenseQuery } from '@tanstack/react-query';
 import { createFileRoute } from '@tanstack/react-router';
 import { useState } from 'react';
 
+import { getMemorizationList } from '@/entities/memorizeList/api';
 import { AddMemorizeItem } from '@/features/memorizeList/addItem/AddMemorizeItem';
 import { MemorizeStatusSwitch } from '@/features/memorizeList/memorizeStatusSwitch/MemorizeStatusSwitch';
 import { RadioButton, RadioGroup } from '@/shared/ui/Radio';
@@ -18,7 +20,15 @@ const MemorizeStatusRecord = {
 type MemorizeStatusType = keyof typeof MemorizeStatusRecord;
 
 function HomeComponent() {
+  const { data } = useSuspenseQuery({
+    queryKey: [ 'memorizationList' ],
+    queryFn:getMemorizationList
+  });
+
   const [ memorizeStatus, setMemorizeStatus ] = useState<MemorizeStatusType>('ONGOING');
+
+  const filteredMemorizationList = data?.filter(ele => memorizeStatus === 'COMPLETE' ? ele.isMemorized : !ele.isMemorized) ?? [];
+
   return (
     <>
       <div className={'flex items-center justify-between px-4 py-3'}>
@@ -40,7 +50,7 @@ function HomeComponent() {
         </RadioGroup>
       </div>
 
-      <MemorizeList />
+      <MemorizeList memorizationList={filteredMemorizationList}/>
       {/* // todo footer navigation */}
     </>
   );
