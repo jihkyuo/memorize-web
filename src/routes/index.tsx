@@ -3,9 +3,10 @@ import { createFileRoute } from '@tanstack/react-router';
 import { useState } from 'react';
 
 import { getMemorizationList } from '@/entities/memorizeList/api';
+import { memorizationQueryKeys } from '@/entities/memorizeList/queries';
 import { AddMemorizeItem } from '@/features/memorizeList/addItem/AddMemorizeItem';
+import { MemorizeStatusSwitch } from '@/features/memorizeList/memorizeStatusSwitch/MemorizeStatusSwitch';
 import { MemorizeList } from '@/widgets/memorizeList/list/ui/MemorizeList';
-import { MemorizeStatusSwitch } from '../features/memorizeList/memorizeStatusSwitch/MemorizeStatusSwitch';
 
 export const Route = createFileRoute('/')({
   component: HomeComponent,
@@ -13,7 +14,7 @@ export const Route = createFileRoute('/')({
 
 function HomeComponent() {
   const { data, refetch } = useSuspenseQuery({
-    queryKey: [ 'memorizationList' ],
+    ...memorizationQueryKeys.list,
     queryFn: getMemorizationList,
   });
 
