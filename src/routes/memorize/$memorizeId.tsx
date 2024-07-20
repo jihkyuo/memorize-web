@@ -1,5 +1,6 @@
 import { createFileRoute, Outlet, redirect, useLocation } from '@tanstack/react-router';
 import { useState } from 'react';
+import { z } from 'zod';
 
 import { Header } from '@/shared/ui/Header/Header';
 import { Tabs, type TabItemProps } from '@/shared/ui/Tabs';
@@ -7,6 +8,12 @@ import { Tabs, type TabItemProps } from '@/shared/ui/Tabs';
 type SectionType = 'main-text' | 'record';
 
 export const Route = createFileRoute('/memorize/$memorizeId')({
+  params: {
+    parse: (params) => ({
+      memorizeId: z.number().int().parse(Number(params.memorizeId)),
+    }),
+    stringify: ({ memorizeId }) => ({ memorizeId: `${memorizeId}` }),
+  },
   component: MemorizeDetail,
   beforeLoad: ctx => {
     const isCorrect = ctx.location.pathname.includes('main-text') || ctx.location.pathname.includes('record');
