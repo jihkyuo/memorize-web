@@ -16,8 +16,12 @@ function RootComponent() {
       <Layout>
         <Outlet />
       </Layout>
-      <TanStackRouterDevtools position={'bottom-right'} />
-      <ReactQueryDevtools buttonPosition={'bottom-right'} />
+      {import.meta.env.DEV && (
+        <>
+          <TanStackRouterDevtools position={'bottom-right'} />
+          <ReactQueryDevtools buttonPosition={'bottom-right'} />
+        </>
+      )}
     </>
   );
 }
