@@ -2,10 +2,10 @@ import { createFileRoute, Outlet, redirect, useLocation } from '@tanstack/react-
 import { useState } from 'react';
 import { z } from 'zod';
 
+import { getMemorizationDetail } from '@/entities/memorizationDetail/api/memorizationDetail.resolver';
 import { memorizationQueryKeys } from '@/entities/memorizationList/queries';
 import { Header } from '@/shared/ui/Header/Header';
 import { Tabs, type TabItemProps } from '@/shared/ui/Tabs';
-import { getMemorizationDetail } from '../../entities/memorizationList/api/memorizationList.resolver';
 
 type SectionType = 'main-text' | 'record';
 
@@ -16,7 +16,7 @@ export const Route = createFileRoute('/memorization/$memorizationId')({
     }),
     stringify: ({ memorizationId }) => ({ memorizationId: `${memorizationId}` }),
   },
-  component: MemorizeDetail,
+  component: MemorizationDetail,
   loader: ctx => {
     const memorizationId = ctx.params.memorizationId;
     return ctx.context.queryClient.ensureQueryData({
@@ -34,7 +34,7 @@ export const Route = createFileRoute('/memorization/$memorizationId')({
   },
 });
 
-function MemorizeDetail() {
+function MemorizationDetail() {
   const navigate = Route.useNavigate();
   const location = useLocation();
   const match = Route.useMatch();
