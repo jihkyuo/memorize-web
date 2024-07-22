@@ -1,15 +1,18 @@
+import { useSuspenseQuery } from '@tanstack/react-query';
 import { createFileRoute, Outlet, redirect, useLocation } from '@tanstack/react-router';
 import { useState } from 'react';
 import { z } from 'zod';
 
+import { memorizationQueryKeys } from '@/entities/memorizeList/queries';
 import { Header } from '@/shared/ui/Header/Header';
 import { Tabs, type TabItemProps } from '@/shared/ui/Tabs';
+import { getMemorizationDetail } from '../../entities/memorizeList/api/memorizeList.resolver';
 
 type SectionType = 'main-text' | 'record';
 
 export const Route = createFileRoute('/memorize/$memorizeId')({
   params: {
-    parse: (params) => ({
+    parse: params => ({
       memorizeId: z.number().int().parse(Number(params.memorizeId)),
     }),
     stringify: ({ memorizeId }) => ({ memorizeId: `${memorizeId}` }),
@@ -30,7 +33,12 @@ function MemorizeDetail() {
   const location = useLocation();
   const match = Route.useMatch();
   const lastSegment = location.pathname.split('/').pop() as SectionType;
-
+  const { memorizeId } = Route.useParams();
+  const { data } = useSuspenseQuery({
+    ...memorizationQueryKeys.detail(memorizeId),
+    queryFn: () => getMemorizationDetail(memorizeId),
+  });
+  console.log(data);
   const [ section, setSection ] = useState<SectionType>(lastSegment);
 
   const items: TabItemProps<SectionType>[] = [

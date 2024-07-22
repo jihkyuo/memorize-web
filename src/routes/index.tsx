@@ -13,13 +13,13 @@ export const Route = createFileRoute('/')({
 });
 
 function HomeComponent() {
-  const { data, refetch } = useSuspenseQuery({
+  const { data: memorizationList, refetch } = useSuspenseQuery({
     ...memorizationQueryKeys.list,
     queryFn: getMemorizationList,
   });
 
   const [ isMemorizedStatus, setIsMemorizedStatus ] = useState(false);
-  const filteredMemorizationList = data?.filter(ele => isMemorizedStatus === ele.isMemorized) ?? [];
+  const filteredMemorizationList = memorizationList.filter(ele => isMemorizedStatus === ele.isMemorized);
 
   return (
     <>
