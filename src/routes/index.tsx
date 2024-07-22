@@ -5,8 +5,8 @@ import { useState } from 'react';
 import { getMemorizationList } from '@/entities/memorizationList/api/memorizationList.resolver';
 import { memorizationQueryKeys } from '@/entities/memorizationList/queries';
 import { AddMemorizeItem } from '@/features/memorizationList/addItem/AddMemorizeItem';
-import { MemorizeStatusSwitch } from '@/features/memorizationList/memorizeStatusSwitch/MemorizeStatusSwitch';
-import { MemorizeList } from '@/widgets/MemorizationList/MemorizeList';
+import { MemorizationStatusSwitch } from '@/features/memorizationList/memorizationStatusSwitch/MemorizationStatusSwitch';
+import { MemorizationList } from '@/widgets/MemorizationList/MemorizationList';
 
 export const Route = createFileRoute('/')({
   component: HomeComponent,
@@ -28,9 +28,9 @@ function HomeComponent() {
         <AddMemorizeItem />
       </div>
 
-      <MemorizeStatusSwitch isMemorizedStatus={isMemorizedStatus} setIsMemorizedStatus={setIsMemorizedStatus} />
+      <MemorizationStatusSwitch isMemorizedStatus={isMemorizedStatus} setIsMemorizedStatus={setIsMemorizedStatus} />
 
-      <MemorizeList memorizationList={filteredMemorizationList} refetch={refetch} />
+      <MemorizationList memorizationList={filteredMemorizationList} refetch={refetch} />
       {/* // todo footer navigation */}
     </>
   );

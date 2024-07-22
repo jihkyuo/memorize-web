@@ -1,8 +1,8 @@
 import { useNavigate } from '@tanstack/react-router';
 
 import { useUpdateIsMemorizedMutation } from '@/entities/memorizationList/hooks/useUpdateIsMemorizedMutation';
-import type { MemorizationDto } from '@/entities/memorizationList/types/memorizeList.dto';
-import { MemorizeItem } from '@/entities/memorizationList/ui/MemorizationItem';
+import type { MemorizationDto } from '@/entities/memorizationList/types/memorizationList.dto';
+import { MemorizationItem } from '@/entities/memorizationList/ui/MemorizationItem';
 import { Route as MainTextRoute } from '@/routes/memorization/$memorizationId/main-text';
 
 interface Props {
@@ -10,7 +10,7 @@ interface Props {
   refetch: () => void;
 }
 
-export function MemorizeList({ memorizationList }: Props) {
+export function MemorizationList({ memorizationList }: Props) {
   const navigate = useNavigate();
   const navigateToMainText = (memorizationId: number) => {
     navigate({ to: MainTextRoute.to, params: { memorizationId } });
@@ -20,7 +20,7 @@ export function MemorizeList({ memorizationList }: Props) {
   return (
     <div className={'space-y-4 p-5'}>
       {memorizationList.map(ele => (
-        <MemorizeItem
+        <MemorizationItem
           key={ele.id}
           title={ele.title}
           description={ele.mainText}

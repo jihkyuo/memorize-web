@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { updateIsMemorized } from '@/entities/memorizationList/api/memorizationList.resolver';
 import { memorizationQueryKeys } from '@/entities/memorizationList/queries';
-import { MemorizationDto } from '@/entities/memorizationList/types/memorizeList.dto';
+import { MemorizationDto } from '@/entities/memorizationList/types/memorizationList.dto';
 
 export function useUpdateIsMemorizedMutation() {
   const queryClient = useQueryClient();

@@ -1,4 +1,4 @@
-import { StatusSwitchButton } from '@/features/memorizationList/memorizeStatusSwitch/StatusSwitchButton';
+import { StatusSwitchButton } from '@/features/memorizationList/memorizationStatusSwitch/StatusSwitchButton';
 import { RadioButton, RadioGroup } from '@/shared/ui/Radio';
 
 interface Props {
@@ -6,7 +6,7 @@ interface Props {
   setIsMemorizedStatus: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export function MemorizeStatusSwitch({ isMemorizedStatus, setIsMemorizedStatus }: Props) {
+export function MemorizationStatusSwitch({ isMemorizedStatus, setIsMemorizedStatus }: Props) {
   const onChangeStatus = (value: string) => setIsMemorizedStatus(JSON.parse(value));
 
   return (

@@ -1,14 +1,14 @@
-import { UpdateIsMemorizedBodyDto } from '../types/memorizeList.dto';
-import { memorizeListService } from './memorizationList.service';
+import { UpdateIsMemorizedBodyDto } from '../types/memorizationList.dto';
+import { memorizationListService } from './memorizationList.service';
 
 export const getMemorizationList = async () => {
-  return await memorizeListService.getMemorizationList();
+  return await memorizationListService.getMemorizationList();
 };
 
 export const getMemorizationDetail = async (id: number) => {
-  return await memorizeListService.getMemorizationDetail(id);
+  return await memorizationListService.getMemorizationDetail(id);
 };
 
 export const updateIsMemorized = async (body: UpdateIsMemorizedBodyDto) => {
-  return await memorizeListService.updateIsMemorized(body);
+  return await memorizationListService.updateIsMemorized(body);
 };

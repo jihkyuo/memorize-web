@@ -12,7 +12,7 @@ interface Props {
   onChangeCheck?: React.ChangeEventHandler<HTMLInputElement>;
 }
 
-export function MemorizeItem({ title, description, isChecked, onClick, onChangeCheck }: Props) {
+export function MemorizationItem({ title, description, isChecked, onClick, onChangeCheck }: Props) {
   return (
     <Card onClick={onClick}>
       <Checkbox checked={isChecked} onChange={onChangeCheck} onClick={e => e.stopPropagation()}/>
