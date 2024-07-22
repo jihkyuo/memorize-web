@@ -1,4 +1,4 @@
-import { StatusSwitchButton } from '@/features/memorizeList/memorizeStatusSwitch/StatusSwitchButton';
+import { StatusSwitchButton } from '@/features/memorizationList/memorizeStatusSwitch/StatusSwitchButton';
 import { RadioButton, RadioGroup } from '@/shared/ui/Radio';
 
 interface Props {

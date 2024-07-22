@@ -1,9 +1,9 @@
 import { useNavigate } from '@tanstack/react-router';
 
-import { useUpdateIsMemorizedMutation } from '@/entities/memorizeList/hooks/useUpdateIsMemorizedMutation';
-import type { MemorizationDto } from '@/entities/memorizeList/types/memorizeList.dto';
-import { MemorizeItem } from '@/entities/memorizeList/ui/MemorizeItem';
-import { Route as MainTextRoute } from '@/routes/memorize/$memorizeId/main-text';
+import { useUpdateIsMemorizedMutation } from '@/entities/memorizationList/hooks/useUpdateIsMemorizedMutation';
+import type { MemorizationDto } from '@/entities/memorizationList/types/memorizeList.dto';
+import { MemorizeItem } from '@/entities/memorizationList/ui/MemorizationItem';
+import { Route as MainTextRoute } from '@/routes/memorization/$memorizationId/main-text';
 
 interface Props {
   memorizationList: MemorizationDto[];
@@ -12,8 +12,8 @@ interface Props {
 
 export function MemorizeList({ memorizationList }: Props) {
   const navigate = useNavigate();
-  const navigateToMainText = (memorizeId: number) => {
-    navigate({ to: MainTextRoute.to, params: { memorizeId } });
+  const navigateToMainText = (memorizationId: number) => {
+    navigate({ to: MainTextRoute.to, params: { memorizationId } });
   };
   const { mutate } = useUpdateIsMemorizedMutation();
 

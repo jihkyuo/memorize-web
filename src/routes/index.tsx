@@ -2,11 +2,11 @@ import { useSuspenseQuery } from '@tanstack/react-query';
 import { createFileRoute } from '@tanstack/react-router';
 import { useState } from 'react';
 
-import { getMemorizationList } from '@/entities/memorizeList/api';
-import { memorizationQueryKeys } from '@/entities/memorizeList/queries';
-import { AddMemorizeItem } from '@/features/memorizeList/addItem/AddMemorizeItem';
-import { MemorizeStatusSwitch } from '@/features/memorizeList/memorizeStatusSwitch/MemorizeStatusSwitch';
-import { MemorizeList } from '@/widgets/memorizeList/list/ui/MemorizeList';
+import { getMemorizationList } from '@/entities/memorizationList/api/memorizationList.resolver';
+import { memorizationQueryKeys } from '@/entities/memorizationList/queries';
+import { AddMemorizeItem } from '@/features/memorizationList/addItem/AddMemorizeItem';
+import { MemorizeStatusSwitch } from '@/features/memorizationList/memorizeStatusSwitch/MemorizeStatusSwitch';
+import { MemorizeList } from '@/widgets/MemorizationList/MemorizeList';
 
 export const Route = createFileRoute('/')({
   component: HomeComponent,

@@ -2,23 +2,23 @@ import { createFileRoute, Outlet, redirect, useLocation } from '@tanstack/react-
 import { useState } from 'react';
 import { z } from 'zod';
 
-import { memorizationQueryKeys } from '@/entities/memorizeList/queries';
+import { memorizationQueryKeys } from '@/entities/memorizationList/queries';
 import { Header } from '@/shared/ui/Header/Header';
 import { Tabs, type TabItemProps } from '@/shared/ui/Tabs';
-import { getMemorizationDetail } from '../../entities/memorizeList/api/memorizeList.resolver';
+import { getMemorizationDetail } from '../../entities/memorizationList/api/memorizationList.resolver';
 
 type SectionType = 'main-text' | 'record';
 
-export const Route = createFileRoute('/memorize/$memorizeId')({
+export const Route = createFileRoute('/memorization/$memorizationId')({
   params: {
     parse: params => ({
-      memorizeId: z.number().int().parse(Number(params.memorizeId)),
+      memorizationId: z.number().int().parse(Number(params.memorizationId)),
     }),
-    stringify: ({ memorizeId }) => ({ memorizeId: `${memorizeId}` }),
+    stringify: ({ memorizationId }) => ({ memorizationId: `${memorizationId}` }),
   },
   component: MemorizeDetail,
   loader: ctx => {
-    const memorizeId = ctx.params.memorizeId;
+    const memorizeId = ctx.params.memorizationId;
     return ctx.context.queryClient.ensureQueryData({
       ...memorizationQueryKeys.detail(memorizeId),
       queryFn: () => getMemorizationDetail(memorizeId),

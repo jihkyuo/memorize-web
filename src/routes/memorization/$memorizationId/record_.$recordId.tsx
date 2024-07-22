@@ -1,10 +1,10 @@
 import { createFileRoute, useRouter } from '@tanstack/react-router';
 
-import { Route as MemorizationDetailRoute } from '@/routes/memorize/$memorizeId';
+import { Route as MemorizationDetailRoute } from '@/routes/memorization/$memorizationId';
 import { Header } from '@/shared/ui/Header/Header';
 import { TextBox } from '@/shared/ui/TextBox/TextBox';
 
-export const Route = createFileRoute('/memorize/$memorizeId/record/$recordId')({
+export const Route = createFileRoute('/memorization/$memorizationId/record/$recordId')({
   component: RecordDetail,
 });
 

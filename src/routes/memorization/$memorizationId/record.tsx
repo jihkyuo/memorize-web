@@ -2,7 +2,7 @@ import { createFileRoute } from '@tanstack/react-router';
 
 import { RecordItem } from '@/entities/record/ui/RecordItem';
 
-export const Route = createFileRoute('/memorize/$memorizeId/record')({
+export const Route = createFileRoute('/memorization/$memorizationId/record')({
   component: Record,
 });
 

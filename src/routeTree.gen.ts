@@ -13,12 +13,10 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as AuthImport } from './routes/_auth'
 import { Route as IndexImport } from './routes/index'
-import { Route as RecordIndexImport } from './routes/record/index'
-import { Route as RecordRecordIdImport } from './routes/record/$recordId'
-import { Route as MemorizeMemorizeIdImport } from './routes/memorize/$memorizeId'
-import { Route as MemorizeMemorizeIdRecordImport } from './routes/memorize/$memorizeId/record'
-import { Route as MemorizeMemorizeIdMainTextImport } from './routes/memorize/$memorizeId/main-text'
-import { Route as MemorizeMemorizeIdRecordRecordIdImport } from './routes/memorize/$memorizeId/record_.$recordId'
+import { Route as MemorizationMemorizationIdImport } from './routes/memorization/$memorizationId'
+import { Route as MemorizationMemorizationIdRecordImport } from './routes/memorization/$memorizationId/record'
+import { Route as MemorizationMemorizationIdMainTextImport } from './routes/memorization/$memorizationId/main-text'
+import { Route as MemorizationMemorizationIdRecordRecordIdImport } from './routes/memorization/$memorizationId/record_.$recordId'
 
 // Create/Update Routes
 
@@ -32,37 +30,29 @@ const IndexRoute = IndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const RecordIndexRoute = RecordIndexImport.update({
-  path: '/record/',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const RecordRecordIdRoute = RecordRecordIdImport.update({
-  path: '/record/$recordId',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const MemorizeMemorizeIdRoute = MemorizeMemorizeIdImport.update({
-  path: '/memorize/$memorizeId',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const MemorizeMemorizeIdRecordRoute = MemorizeMemorizeIdRecordImport.update({
-  path: '/record',
-  getParentRoute: () => MemorizeMemorizeIdRoute,
-} as any)
-
-const MemorizeMemorizeIdMainTextRoute = MemorizeMemorizeIdMainTextImport.update(
+const MemorizationMemorizationIdRoute = MemorizationMemorizationIdImport.update(
   {
-    path: '/main-text',
-    getParentRoute: () => MemorizeMemorizeIdRoute,
+    path: '/memorization/$memorizationId',
+    getParentRoute: () => rootRoute,
   } as any,
 )
 
-const MemorizeMemorizeIdRecordRecordIdRoute =
-  MemorizeMemorizeIdRecordRecordIdImport.update({
+const MemorizationMemorizationIdRecordRoute =
+  MemorizationMemorizationIdRecordImport.update({
+    path: '/record',
+    getParentRoute: () => MemorizationMemorizationIdRoute,
+  } as any)
+
+const MemorizationMemorizationIdMainTextRoute =
+  MemorizationMemorizationIdMainTextImport.update({
+    path: '/main-text',
+    getParentRoute: () => MemorizationMemorizationIdRoute,
+  } as any)
+
+const MemorizationMemorizationIdRecordRecordIdRoute =
+  MemorizationMemorizationIdRecordRecordIdImport.update({
     path: '/record/$recordId',
-    getParentRoute: () => MemorizeMemorizeIdRoute,
+    getParentRoute: () => MemorizationMemorizationIdRoute,
   } as any)
 
 // Populate the FileRoutesByPath interface
@@ -83,47 +73,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthImport
       parentRoute: typeof rootRoute
     }
-    '/memorize/$memorizeId': {
-      id: '/memorize/$memorizeId'
-      path: '/memorize/$memorizeId'
-      fullPath: '/memorize/$memorizeId'
-      preLoaderRoute: typeof MemorizeMemorizeIdImport
+    '/memorization/$memorizationId': {
+      id: '/memorization/$memorizationId'
+      path: '/memorization/$memorizationId'
+      fullPath: '/memorization/$memorizationId'
+      preLoaderRoute: typeof MemorizationMemorizationIdImport
       parentRoute: typeof rootRoute
     }
-    '/record/$recordId': {
-      id: '/record/$recordId'
-      path: '/record/$recordId'
-      fullPath: '/record/$recordId'
-      preLoaderRoute: typeof RecordRecordIdImport
-      parentRoute: typeof rootRoute
-    }
-    '/record/': {
-      id: '/record/'
-      path: '/record'
-      fullPath: '/record'
-      preLoaderRoute: typeof RecordIndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/memorize/$memorizeId/main-text': {
-      id: '/memorize/$memorizeId/main-text'
+    '/memorization/$memorizationId/main-text': {
+      id: '/memorization/$memorizationId/main-text'
       path: '/main-text'
-      fullPath: '/memorize/$memorizeId/main-text'
-      preLoaderRoute: typeof MemorizeMemorizeIdMainTextImport
-      parentRoute: typeof MemorizeMemorizeIdImport
+      fullPath: '/memorization/$memorizationId/main-text'
+      preLoaderRoute: typeof MemorizationMemorizationIdMainTextImport
+      parentRoute: typeof MemorizationMemorizationIdImport
     }
-    '/memorize/$memorizeId/record': {
-      id: '/memorize/$memorizeId/record'
+    '/memorization/$memorizationId/record': {
+      id: '/memorization/$memorizationId/record'
       path: '/record'
-      fullPath: '/memorize/$memorizeId/record'
-      preLoaderRoute: typeof MemorizeMemorizeIdRecordImport
-      parentRoute: typeof MemorizeMemorizeIdImport
+      fullPath: '/memorization/$memorizationId/record'
+      preLoaderRoute: typeof MemorizationMemorizationIdRecordImport
+      parentRoute: typeof MemorizationMemorizationIdImport
     }
-    '/memorize/$memorizeId/record/$recordId': {
-      id: '/memorize/$memorizeId/record/$recordId'
+    '/memorization/$memorizationId/record/$recordId': {
+      id: '/memorization/$memorizationId/record/$recordId'
       path: '/record/$recordId'
-      fullPath: '/memorize/$memorizeId/record/$recordId'
-      preLoaderRoute: typeof MemorizeMemorizeIdRecordRecordIdImport
-      parentRoute: typeof MemorizeMemorizeIdImport
+      fullPath: '/memorization/$memorizationId/record/$recordId'
+      preLoaderRoute: typeof MemorizationMemorizationIdRecordRecordIdImport
+      parentRoute: typeof MemorizationMemorizationIdImport
     }
   }
 }
@@ -132,13 +108,11 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren({
   IndexRoute,
-  MemorizeMemorizeIdRoute: MemorizeMemorizeIdRoute.addChildren({
-    MemorizeMemorizeIdMainTextRoute,
-    MemorizeMemorizeIdRecordRoute,
-    MemorizeMemorizeIdRecordRecordIdRoute,
+  MemorizationMemorizationIdRoute: MemorizationMemorizationIdRoute.addChildren({
+    MemorizationMemorizationIdMainTextRoute,
+    MemorizationMemorizationIdRecordRoute,
+    MemorizationMemorizationIdRecordRecordIdRoute,
   }),
-  RecordRecordIdRoute,
-  RecordIndexRoute,
 })
 
 /* prettier-ignore-end */
@@ -151,9 +125,7 @@ export const routeTree = rootRoute.addChildren({
       "children": [
         "/",
         "/_auth",
-        "/memorize/$memorizeId",
-        "/record/$recordId",
-        "/record/"
+        "/memorization/$memorizationId"
       ]
     },
     "/": {
@@ -162,31 +134,25 @@ export const routeTree = rootRoute.addChildren({
     "/_auth": {
       "filePath": "_auth.tsx"
     },
-    "/memorize/$memorizeId": {
-      "filePath": "memorize/$memorizeId.tsx",
+    "/memorization/$memorizationId": {
+      "filePath": "memorization/$memorizationId.tsx",
       "children": [
-        "/memorize/$memorizeId/main-text",
-        "/memorize/$memorizeId/record",
-        "/memorize/$memorizeId/record/$recordId"
+        "/memorization/$memorizationId/main-text",
+        "/memorization/$memorizationId/record",
+        "/memorization/$memorizationId/record/$recordId"
       ]
     },
-    "/record/$recordId": {
-      "filePath": "record/$recordId.tsx"
+    "/memorization/$memorizationId/main-text": {
+      "filePath": "memorization/$memorizationId/main-text.tsx",
+      "parent": "/memorization/$memorizationId"
     },
-    "/record/": {
-      "filePath": "record/index.tsx"
+    "/memorization/$memorizationId/record": {
+      "filePath": "memorization/$memorizationId/record.tsx",
+      "parent": "/memorization/$memorizationId"
     },
-    "/memorize/$memorizeId/main-text": {
-      "filePath": "memorize/$memorizeId/main-text.tsx",
-      "parent": "/memorize/$memorizeId"
-    },
-    "/memorize/$memorizeId/record": {
-      "filePath": "memorize/$memorizeId/record.tsx",
-      "parent": "/memorize/$memorizeId"
-    },
-    "/memorize/$memorizeId/record/$recordId": {
-      "filePath": "memorize/$memorizeId/record_.$recordId.tsx",
-      "parent": "/memorize/$memorizeId"
+    "/memorization/$memorizationId/record/$recordId": {
+      "filePath": "memorization/$memorizationId/record_.$recordId.tsx",
+      "parent": "/memorization/$memorizationId"
     }
   }
 }

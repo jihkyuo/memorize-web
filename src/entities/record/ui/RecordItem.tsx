@@ -1,9 +1,9 @@
 import { MouseEvent } from 'react';
 
 import IconTrash from '@/assets/icons/icon-trash.svg';
+import { Route as RecordDetailRoute } from '@/routes/memorization/$memorizationId/record_.$recordId';
 import { Card } from '@/shared/ui/Card/Card';
 import { Typography } from '@/shared/ui/Typography/Typography';
-import { Route as RecordDetailRoute } from '../../../routes/memorize/$memorizeId/record_.$recordId';
 
 interface Props {
   title: string;
@@ -15,7 +15,7 @@ export function RecordItem({ title, description, recordId }: Props) {
 
   const handleCardClick = () => {
     navigate({
-      from: '/memorize/$memorizeId/record',
+      from: '/memorization/$memorizationId/record',
       to: RecordDetailRoute.to,
       params: { recordId },
     });

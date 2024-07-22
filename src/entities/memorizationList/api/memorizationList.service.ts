@@ -1,4 +1,4 @@
-import type { MemorizationDto } from '@/entities/memorizeList/types/memorizeList.dto';
+import type { MemorizationDto } from '@/entities/memorizationList/types/memorizeList.dto';
 import { supabase } from '@/shared/api/baseApi';
 import { DB_NAME } from '@/shared/api/db';
 import { UpdateIsMemorizedBodyDto } from '../types/memorizeList.dto';

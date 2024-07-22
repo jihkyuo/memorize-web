@@ -1,8 +1,8 @@
 import { createFileRoute } from '@tanstack/react-router';
 
-import { Route as MemorizationDetailRoute } from '@/routes/memorize/$memorizeId';
+import { Route as MemorizationDetailRoute } from '@/routes/memorization/$memorizationId';
 
-export const Route = createFileRoute('/memorize/$memorizeId/main-text')({
+export const Route = createFileRoute('/memorization/$memorizationId/main-text')({
   component: MainText,
 });
 

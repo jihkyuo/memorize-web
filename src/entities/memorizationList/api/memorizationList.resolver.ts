@@ -1,5 +1,5 @@
 import { UpdateIsMemorizedBodyDto } from '../types/memorizeList.dto';
-import { memorizeListService } from './memorizeList.service';
+import { memorizeListService } from './memorizationList.service';
 
 export const getMemorizationList = async () => {
   return await memorizeListService.getMemorizationList();
