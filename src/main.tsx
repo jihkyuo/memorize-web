@@ -3,6 +3,7 @@ import { ErrorComponent, RouterProvider, createRouter } from '@tanstack/react-ro
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { RecoilRoot } from 'recoil';
+import 'regenerator-runtime';
 
 import './index.css';
 import { routeTree } from './routeTree.gen';

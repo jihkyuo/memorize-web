@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
 
-import { AddRecording } from '@/features/memorizationDetail/addRecording/AddRecording';
+import { AddRecording } from '@/features/memorizationDetail/addRecording';
 import { RecordList } from '@/widgets/RecordList/ui/RecordList';
 
 export const Route = createFileRoute('/memorization/$memorizationId/record')({
