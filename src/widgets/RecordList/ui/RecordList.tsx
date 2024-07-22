@@ -1,4 +1,4 @@
-import { RecordItem } from '@/entities/record/ui/RecordItem';
+import { RecordItem } from '@/widgets/RecordList/ui/RecordItem';
 
 export function RecordList() {
   return (

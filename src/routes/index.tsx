@@ -5,8 +5,8 @@ import { useState } from 'react';
 import { getMemorizationList } from '@/entities/memorizationList/api/memorizationList.resolver';
 import { memorizationQueryKeys } from '@/entities/memorizationList/queries';
 import { AddMemorizeItem } from '@/features/memorizationList/addItem/AddMemorizeItem';
-import { MemorizationStatusSwitch } from '@/features/memorizationList/memorizationStatusSwitch/MemorizationStatusSwitch';
-import { MemorizationList } from '@/widgets/MemorizationList/MemorizationList';
+import { MemorizationStatusSwitch } from '@/features/memorizationList/memorizationStatusSwitch';
+import { MemorizationList } from '@/widgets/MemorizationList';
 
 export const Route = createFileRoute('/')({
   component: HomeComponent,

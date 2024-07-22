@@ -1,9 +1,9 @@
 import { useNavigate } from '@tanstack/react-router';
 
-import { useUpdateIsMemorizedMutation } from '@/entities/memorizationList/hooks/useUpdateIsMemorizedMutation';
 import type { MemorizationDto } from '@/entities/memorizationList/types/memorizationList.dto';
-import { MemorizationItem } from '@/entities/memorizationList/ui/MemorizationItem';
+import { ToggleIsMemorizedCheckbox, useUpdateIsMemorizedMutation } from '@/features/memorizationList/toggleIsMemorized';
 import { Route as MainTextRoute } from '@/routes/memorization/$memorizationId/main-text';
+import { MemorizationItem } from '@/widgets/MemorizationList/ui/MemorizationItem';
 
 interface Props {
   memorizationList: MemorizationDto[];
@@ -26,9 +26,11 @@ export function MemorizationList({ memorizationList }: Props) {
           description={ele.mainText}
           isChecked={ele.isMemorized}
           onClick={() => navigateToMainText(ele.id)}
-          onChangeCheck={event => {
-            mutate({ id: ele.id, isMemorized: event.target.checked });
-          }}/>
+          prefix={(
+            <ToggleIsMemorizedCheckbox
+              isMemorized={ele.isMemorized}
+              onChange={event => mutate({ id: ele.id, isMemorized: event.target.checked })}/>
+          )}/>
       ))}
     </div>
   );

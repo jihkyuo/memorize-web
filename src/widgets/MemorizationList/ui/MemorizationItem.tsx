@@ -1,7 +1,7 @@
 import type React from 'react';
+import type { ReactNode } from 'react';
 
 import { Card } from '@/shared/ui/Card/Card';
-import { Checkbox } from '@/shared/ui/Checkbox/Checkbox';
 import { Typography } from '@/shared/ui/Typography/Typography';
 
 interface Props {
@@ -9,13 +9,13 @@ interface Props {
   description: string;
   isChecked: boolean;
   onClick?: React.MouseEventHandler<HTMLDivElement>;
-  onChangeCheck?: React.ChangeEventHandler<HTMLInputElement>;
+  prefix: ReactNode;
 }
 
-export function MemorizationItem({ title, description, isChecked, onClick, onChangeCheck }: Props) {
+export function MemorizationItem({ title, description, onClick, prefix }: Props) {
   return (
     <Card onClick={onClick}>
-      <Checkbox checked={isChecked} onChange={onChangeCheck} onClick={e => e.stopPropagation()}/>
+      {prefix}
       <Typography description={description}>{title}</Typography>
     </Card>
   );
