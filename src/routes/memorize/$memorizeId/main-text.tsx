@@ -11,5 +11,5 @@ function MainText() {
     select: select => ({ mainText: select.mainText }),
   });
 
-  return <div className={'whitespace-pre-line p-6 text-lg font-normal'}>{mainText}</div>;
+  return <div className={'whitespace-pre-line break-keep p-6 text-lg font-normal'}>{mainText}</div>;
 }

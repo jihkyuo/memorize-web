@@ -31,7 +31,6 @@ function HomeComponent() {
       <MemorizeStatusSwitch isMemorizedStatus={isMemorizedStatus} setIsMemorizedStatus={setIsMemorizedStatus} />
 
       <MemorizeList memorizationList={filteredMemorizationList} refetch={refetch} />
-      체크
       {/* // todo footer navigation */}
     </>
   );
