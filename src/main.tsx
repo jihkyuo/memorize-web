@@ -7,12 +7,17 @@ import { RecoilRoot } from 'recoil';
 import './index.css';
 import { routeTree } from './routeTree.gen';
 
+export const queryClient = new QueryClient();
+
 // Set up a Router instance
 const router = createRouter({
   routeTree,
   defaultPendingComponent: () => <div>Loading...</div>,
   defaultErrorComponent: ({ error }) => <ErrorComponent error={error} />,
   defaultPreload: 'intent',
+  context: {
+    queryClient,
+  },
 });
 
 // Register things for typesafety
@@ -21,8 +26,6 @@ declare module '@tanstack/react-router' {
     router: typeof router;
   }
 }
-
-export const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

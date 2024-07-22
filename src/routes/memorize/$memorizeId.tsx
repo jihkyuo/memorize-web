@@ -1,5 +1,4 @@
-import { useSuspenseQuery } from '@tanstack/react-query';
-import { createFileRoute, Outlet, useLocation } from '@tanstack/react-router';
+import { createFileRoute, Outlet, redirect, useLocation } from '@tanstack/react-router';
 import { useState } from 'react';
 import { z } from 'zod';
 
@@ -18,14 +17,21 @@ export const Route = createFileRoute('/memorize/$memorizeId')({
     stringify: ({ memorizeId }) => ({ memorizeId: `${memorizeId}` }),
   },
   component: MemorizeDetail,
-  // beforeLoad: ctx => {
-  //   const isCorrect = ctx.location.pathname.includes('main-text') || ctx.location.pathname.includes('record');
-  //   if (!isCorrect) {
-  //     throw redirect({
-  //       to: `/${Route.to}/${'main-text'}`,
-  //     });
-  //   }
-  // },
+  loader: ctx => {
+    const memorizeId = ctx.params.memorizeId;
+    return ctx.context.queryClient.ensureQueryData({
+      ...memorizationQueryKeys.detail(memorizeId),
+      queryFn: () => getMemorizationDetail(memorizeId),
+    });
+  },
+  beforeLoad: ctx => {
+    const isCorrect = ctx.location.pathname.includes('main-text') || ctx.location.pathname.includes('record');
+    if (!isCorrect) {
+      throw redirect({
+        to: `/${Route.to}/${'main-text'}`,
+      });
+    }
+  },
 });
 
 function MemorizeDetail() {
@@ -33,10 +39,8 @@ function MemorizeDetail() {
   const location = useLocation();
   const match = Route.useMatch();
   const lastSegment = location.pathname.split('/').pop() as SectionType;
-  const { memorizeId } = Route.useParams();
-  const { data: memorizationDetail } = useSuspenseQuery({
-    ...memorizationQueryKeys.detail(memorizeId),
-    queryFn: () => getMemorizationDetail(memorizeId),
+  const memorizationDetail = Route.useLoaderData({
+    select: select => ({ title: select.title }),
   });
 
   const [ section, setSection ] = useState<SectionType>(lastSegment);
