@@ -1,5 +1,5 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
-import { createFileRoute, Outlet, redirect, useLocation } from '@tanstack/react-router';
+import { createFileRoute, Outlet, useLocation } from '@tanstack/react-router';
 import { useState } from 'react';
 import { z } from 'zod';
 
@@ -18,14 +18,14 @@ export const Route = createFileRoute('/memorize/$memorizeId')({
     stringify: ({ memorizeId }) => ({ memorizeId: `${memorizeId}` }),
   },
   component: MemorizeDetail,
-  beforeLoad: ctx => {
-    const isCorrect = ctx.location.pathname.includes('main-text') || ctx.location.pathname.includes('record');
-    if (!isCorrect) {
-      throw redirect({
-        to: `/${Route.to}/${'main-text'}`,
-      });
-    }
-  },
+  // beforeLoad: ctx => {
+  //   const isCorrect = ctx.location.pathname.includes('main-text') || ctx.location.pathname.includes('record');
+  //   if (!isCorrect) {
+  //     throw redirect({
+  //       to: `/${Route.to}/${'main-text'}`,
+  //     });
+  //   }
+  // },
 });
 
 function MemorizeDetail() {
@@ -34,11 +34,11 @@ function MemorizeDetail() {
   const match = Route.useMatch();
   const lastSegment = location.pathname.split('/').pop() as SectionType;
   const { memorizeId } = Route.useParams();
-  const { data } = useSuspenseQuery({
+  const { data: memorizationDetail } = useSuspenseQuery({
     ...memorizationQueryKeys.detail(memorizeId),
     queryFn: () => getMemorizationDetail(memorizeId),
   });
-  console.log(data);
+
   const [ section, setSection ] = useState<SectionType>(lastSegment);
 
   const items: TabItemProps<SectionType>[] = [
@@ -66,7 +66,7 @@ function MemorizeDetail() {
     <>
       {!isRecordDetail && (
         <>
-          <Header title={'제목'} navOption={{ type: 'back', onClick: () => navigate({ to: '/' }) }} />
+          <Header title={memorizationDetail.title} navOption={{ type: 'back', onClick: () => navigate({ to: '/' }) }} />
           <Tabs
             value={section}
             items={items}
