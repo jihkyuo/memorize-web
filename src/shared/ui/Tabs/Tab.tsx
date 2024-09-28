@@ -9,7 +9,7 @@ export function Tab({ label, ...inputProps }: Props) {
   return (
     <label
       className={clsx(
-        `z-[1] flex flex-1 cursor-pointer justify-center text-[15px] font-medium text-[#0000004D] transition-colors duration-100`,
+        `z-[1] flex flex-1 cursor-pointer justify-center py-4 text-[15px] font-medium text-[#0000004D] transition-colors duration-100`,
         {
           'font-semibold text-primary': inputProps.checked,
         }

@@ -28,7 +28,7 @@ export function Tabs<TValue extends string>({
   const translateRatio = checkedIndex * 100;
 
   return (
-    <div className={`relative flex py-4 ${isDivideLine ? 'border-b-2' : ''}`}>
+    <div className={`relative flex ${isDivideLine ? 'border-b-2' : ''} `}>
       <TabSlide widthRatio={widthRatio} translateRatio={translateRatio} />
       {items.map(item => (
         <Tab

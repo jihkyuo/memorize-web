@@ -106,14 +106,98 @@ declare module '@tanstack/react-router' {
 
 // Create and export the route tree
 
-export const routeTree = rootRoute.addChildren({
-  IndexRoute,
-  MemorizationMemorizationIdRoute: MemorizationMemorizationIdRoute.addChildren({
-    MemorizationMemorizationIdMainTextRoute,
-    MemorizationMemorizationIdRecordRoute,
-    MemorizationMemorizationIdRecordRecordIdRoute,
-  }),
-})
+interface MemorizationMemorizationIdRouteChildren {
+  MemorizationMemorizationIdMainTextRoute: typeof MemorizationMemorizationIdMainTextRoute
+  MemorizationMemorizationIdRecordRoute: typeof MemorizationMemorizationIdRecordRoute
+  MemorizationMemorizationIdRecordRecordIdRoute: typeof MemorizationMemorizationIdRecordRecordIdRoute
+}
+
+const MemorizationMemorizationIdRouteChildren: MemorizationMemorizationIdRouteChildren =
+  {
+    MemorizationMemorizationIdMainTextRoute:
+      MemorizationMemorizationIdMainTextRoute,
+    MemorizationMemorizationIdRecordRoute:
+      MemorizationMemorizationIdRecordRoute,
+    MemorizationMemorizationIdRecordRecordIdRoute:
+      MemorizationMemorizationIdRecordRecordIdRoute,
+  }
+
+const MemorizationMemorizationIdRouteWithChildren =
+  MemorizationMemorizationIdRoute._addFileChildren(
+    MemorizationMemorizationIdRouteChildren,
+  )
+
+export interface FileRoutesByFullPath {
+  '/': typeof IndexRoute
+  '': typeof AuthRoute
+  '/memorization/$memorizationId': typeof MemorizationMemorizationIdRouteWithChildren
+  '/memorization/$memorizationId/main-text': typeof MemorizationMemorizationIdMainTextRoute
+  '/memorization/$memorizationId/record': typeof MemorizationMemorizationIdRecordRoute
+  '/memorization/$memorizationId/record/$recordId': typeof MemorizationMemorizationIdRecordRecordIdRoute
+}
+
+export interface FileRoutesByTo {
+  '/': typeof IndexRoute
+  '': typeof AuthRoute
+  '/memorization/$memorizationId': typeof MemorizationMemorizationIdRouteWithChildren
+  '/memorization/$memorizationId/main-text': typeof MemorizationMemorizationIdMainTextRoute
+  '/memorization/$memorizationId/record': typeof MemorizationMemorizationIdRecordRoute
+  '/memorization/$memorizationId/record/$recordId': typeof MemorizationMemorizationIdRecordRecordIdRoute
+}
+
+export interface FileRoutesById {
+  __root__: typeof rootRoute
+  '/': typeof IndexRoute
+  '/_auth': typeof AuthRoute
+  '/memorization/$memorizationId': typeof MemorizationMemorizationIdRouteWithChildren
+  '/memorization/$memorizationId/main-text': typeof MemorizationMemorizationIdMainTextRoute
+  '/memorization/$memorizationId/record': typeof MemorizationMemorizationIdRecordRoute
+  '/memorization/$memorizationId/record/$recordId': typeof MemorizationMemorizationIdRecordRecordIdRoute
+}
+
+export interface FileRouteTypes {
+  fileRoutesByFullPath: FileRoutesByFullPath
+  fullPaths:
+    | '/'
+    | ''
+    | '/memorization/$memorizationId'
+    | '/memorization/$memorizationId/main-text'
+    | '/memorization/$memorizationId/record'
+    | '/memorization/$memorizationId/record/$recordId'
+  fileRoutesByTo: FileRoutesByTo
+  to:
+    | '/'
+    | ''
+    | '/memorization/$memorizationId'
+    | '/memorization/$memorizationId/main-text'
+    | '/memorization/$memorizationId/record'
+    | '/memorization/$memorizationId/record/$recordId'
+  id:
+    | '__root__'
+    | '/'
+    | '/_auth'
+    | '/memorization/$memorizationId'
+    | '/memorization/$memorizationId/main-text'
+    | '/memorization/$memorizationId/record'
+    | '/memorization/$memorizationId/record/$recordId'
+  fileRoutesById: FileRoutesById
+}
+
+export interface RootRouteChildren {
+  IndexRoute: typeof IndexRoute
+  AuthRoute: typeof AuthRoute
+  MemorizationMemorizationIdRoute: typeof MemorizationMemorizationIdRouteWithChildren
+}
+
+const rootRouteChildren: RootRouteChildren = {
+  IndexRoute: IndexRoute,
+  AuthRoute: AuthRoute,
+  MemorizationMemorizationIdRoute: MemorizationMemorizationIdRouteWithChildren,
+}
+
+export const routeTree = rootRoute
+  ._addFileChildren(rootRouteChildren)
+  ._addFileTypes<FileRouteTypes>()
 
 /* prettier-ignore-end */
 
