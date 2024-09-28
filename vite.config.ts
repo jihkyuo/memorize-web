@@ -1,8 +1,8 @@
 import { TanStackRouterVite } from '@tanstack/router-plugin/vite';
 import react from '@vitejs/plugin-react';
 import * as path from 'path';
-import { defineConfig } from 'vite';
 import svgr from 'vite-plugin-svgr';
+import { defineConfig } from 'vitest/config';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -11,6 +11,7 @@ export default defineConfig({
       { find: /^~/, replacement: '' },
       { find: /^@(?=\/)/, replacement: path.resolve(__dirname, './src') },
     ],
+    // alias: [{ find: "@", replacement: path.resolve(__dirname, "./src") }]
   },
   plugins: [ 
     TanStackRouterVite(), 
@@ -21,4 +22,9 @@ export default defineConfig({
       include: "**/*.svg",
     }),
   ],
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: './src/shared/test/setupTests.ts',
+  },
 });

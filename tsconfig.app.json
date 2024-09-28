@@ -22,13 +22,16 @@
 
     /* Linting */
     "strict": true,
+    "noImplicitAny": false,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "paths": {
       "@/*": [ "./src/*" ]
-    }
+    },
 
+    /* Vitest */
+    "types": ["vitest/globals"]
   },
   "include": ["src"]
 }
