@@ -1,14 +1,4 @@
 {
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/node",
-      "config": {
-        "buildCommand": "pnpm run build && pnpm run test:run",
-        "outputDirectory": "dist"
-      }
-    }
-  ],
   "rewrites":  [
     {"source": "/(.*)", "destination": "/"}
   ]
