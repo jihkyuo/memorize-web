@@ -44,7 +44,7 @@ it('테스트2 클릭 시, 테스트2의 input이 선택된다.', async () => {
       ]}/>
   );
 
-  const test2Button = screen.getByLabelText('테스트1');
+  const test2Button = screen.getByLabelText('테스트2');
   await user.click(test2Button);
 
   // Tabs 컴포넌트 value 속성에 test2가 전달되어야 한다.
