@@ -59,3 +59,5 @@ it('테스트2 클릭 시, 테스트2의 input이 선택된다.', async () => {
 
   expect(test2Button).toBeChecked();
 });
+
+it.todo('테스트');
