@@ -8,7 +8,7 @@ import { Typography } from '@/shared/ui/Typography/Typography';
 interface Props {
   title: string;
   description: string;
-  recordId: string;
+  recordId: number;
 }
 export function RecordItem({ title, description, recordId }: Props) {
   const navigate = RecordDetailRoute.useNavigate();

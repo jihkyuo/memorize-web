@@ -1,10 +1,17 @@
 import { createFileRoute, useRouter } from '@tanstack/react-router';
+import { z } from 'zod';
 
 import { Route as MemorizationDetailRoute } from '@/routes/memorization/$memorizationId';
 import { Header } from '@/shared/ui/Header/Header';
 import { TextBox } from '@/shared/ui/TextBox/TextBox';
 
 export const Route = createFileRoute('/memorization/$memorizationId/record/$recordId')({
+  params:{
+    parse: params => ({
+      recordId: z.number().int().parse(Number(params.recordId))
+    }),
+    stringify: ({ recordId }) => ({ recordId: `${recordId}` }),
+  },
   component: RecordDetail,
 });
 
