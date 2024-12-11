@@ -7,6 +7,9 @@
   background: currentColor;
   color: #FFF;
   box-sizing: border-box;
+}
+
+.animate {
   animation: animloader 0.3s 0.3s linear infinite alternate;
 }
 
@@ -21,11 +24,18 @@
   transform: translateY(-50%);
   left: 10px;
   box-sizing: border-box;
+}
+
+.animate::after {
   animation: animloader 0.3s  0.45s  linear infinite alternate;
 }
+
 .loader::before {
   left: -10px;
-  animation-delay: 0s;
+}
+
+.animate::before {
+  animation: animloader 0.3s 0s linear infinite alternate;
 }
 
 @keyframes animloader {
