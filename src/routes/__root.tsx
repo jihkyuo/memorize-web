@@ -27,5 +27,5 @@ function RootComponent() {
 }
 
 function Layout({ children }: PropsWithChildren) {
-  return <div className={'h-screen overflow-hidden'}>{children}</div>;
+  return <div className={'flex flex-col h-screen'}>{children}</div>;
 }

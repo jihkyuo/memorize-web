@@ -2,9 +2,9 @@ import { useSuspenseQuery } from '@tanstack/react-query';
 import { createFileRoute } from '@tanstack/react-router';
 import { useState } from 'react';
 
+import IconAdd from '@/assets/icons/icon-add.svg';
 import { getMemorizationList } from '@/entities/memorizationList/api/memorizationList.resolver';
 import { memorizationQueryKeys } from '@/entities/memorizationList/queries';
-import { AddMemorizeItem } from '@/features/memorizationList/addItem/AddMemorizeItem';
 import { MemorizationStatusSwitch } from '@/features/memorizationList/memorizationStatusSwitch';
 import { MemorizationList } from '@/widgets/MemorizationList';
 
@@ -13,6 +13,7 @@ export const Route = createFileRoute('/')({
 });
 
 function HomeComponent() {
+  const navigate = Route.useNavigate();
   const { data: memorizationList, refetch } = useSuspenseQuery({
     ...memorizationQueryKeys.list,
     queryFn: getMemorizationList,
@@ -25,7 +26,7 @@ function HomeComponent() {
     <>
       <div className={'flex items-center justify-between px-4 py-3'}>
         <h3 className={'text-2xl font-bold'}>암기 목록</h3>
-        <AddMemorizeItem />
+        <IconAdd className={'cursor-pointer'} onClick={() => navigate({ to: '/add' })} />
       </div>
 
       <MemorizationStatusSwitch isMemorizedStatus={isMemorizedStatus} setIsMemorizedStatus={setIsMemorizedStatus} />

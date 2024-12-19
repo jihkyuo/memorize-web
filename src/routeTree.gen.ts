@@ -11,6 +11,7 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as AddImport } from './routes/add'
 import { Route as AuthImport } from './routes/_auth'
 import { Route as IndexImport } from './routes/index'
 import { Route as MemorizationMemorizationIdImport } from './routes/memorization/$memorizationId'
@@ -19,6 +20,11 @@ import { Route as MemorizationMemorizationIdMainTextImport } from './routes/memo
 import { Route as MemorizationMemorizationIdRecordRecordIdImport } from './routes/memorization/$memorizationId/record_.$recordId'
 
 // Create/Update Routes
+
+const AddRoute = AddImport.update({
+  path: '/add',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const AuthRoute = AuthImport.update({
   id: '/_auth',
@@ -73,6 +79,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthImport
       parentRoute: typeof rootRoute
     }
+    '/add': {
+      id: '/add'
+      path: '/add'
+      fullPath: '/add'
+      preLoaderRoute: typeof AddImport
+      parentRoute: typeof rootRoute
+    }
     '/memorization/$memorizationId': {
       id: '/memorization/$memorizationId'
       path: '/memorization/$memorizationId'
@@ -108,6 +121,7 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren({
   IndexRoute,
+  AddRoute,
   MemorizationMemorizationIdRoute: MemorizationMemorizationIdRoute.addChildren({
     MemorizationMemorizationIdMainTextRoute,
     MemorizationMemorizationIdRecordRoute,
@@ -125,6 +139,7 @@ export const routeTree = rootRoute.addChildren({
       "children": [
         "/",
         "/_auth",
+        "/add",
         "/memorization/$memorizationId"
       ]
     },
@@ -133,6 +148,9 @@ export const routeTree = rootRoute.addChildren({
     },
     "/_auth": {
       "filePath": "_auth.tsx"
+    },
+    "/add": {
+      "filePath": "add.tsx"
     },
     "/memorization/$memorizationId": {
       "filePath": "memorization/$memorizationId.tsx",
