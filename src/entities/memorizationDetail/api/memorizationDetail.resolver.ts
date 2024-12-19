@@ -12,3 +12,7 @@ export const getRecordList = async (memorizationId: number) => {
 export const createRecord = async (body: CreateRecordBodyDto) => {
   return await memorizationDetailService.createRecord(body);
 };
+
+export const deleteRecord = async (recordId: number) => {
+  return await memorizationDetailService.deleteRecord(recordId);
+};

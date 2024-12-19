@@ -48,8 +48,18 @@ const createRecord = async ({ memorizationId, title, transcript }: CreateRecordB
   return data;
 };
 
+const deleteRecord = async (recordId: number) => {
+  const { data, error, status } = await supabase.from(DB_NAME.RECORD).delete().eq('id', recordId);
+  
+  if (error) {
+    throw { error, status };
+  }
+  return data;
+};
+
 export const memorizationDetailService = {
   getMemorizationDetail,
   getRecordList,
   createRecord,
+  deleteRecord,
 };
