@@ -1,14 +1,16 @@
+import { useSuspenseQuery } from '@tanstack/react-query';
 import { createFileRoute, useRouter } from '@tanstack/react-router';
 import { z } from 'zod';
 
+import { recordDetailQueryKeys } from '@/entities/recordDetail/queries';
 import { Route as MemorizationDetailRoute } from '@/routes/memorization/$memorizationId';
 import { Header } from '@/shared/ui/Header/Header';
 import { TextBox } from '@/shared/ui/TextBox/TextBox';
 
 export const Route = createFileRoute('/memorization/$memorizationId/record/$recordId')({
-  params:{
+  params: {
     parse: params => ({
-      recordId: z.number().int().parse(Number(params.recordId))
+      recordId: z.number().int().parse(Number(params.recordId)),
     }),
     stringify: ({ recordId }) => ({ recordId: `${recordId}` }),
   },
@@ -17,10 +19,12 @@ export const Route = createFileRoute('/memorization/$memorizationId/record/$reco
 
 function RecordDetail() {
   const router = useRouter();
-
+  const { recordId } = Route.useParams();
   const { mainText } = MemorizationDetailRoute.useLoaderData({
     select: select => ({ mainText: select.mainText }),
   });
+
+  const { data: recordDetail } = useSuspenseQuery(recordDetailQueryKeys.detail(recordId));
 
   return (
     <>
@@ -29,8 +33,7 @@ function RecordDetail() {
 
       <div className={'space-y-4 p-4'}>
         <TextBox label={'내용'}>{mainText}</TextBox>
-        <TextBox label={'녹음한 내용'}>text</TextBox>
-        <TextBox label={'정답 확인'}>text</TextBox>
+        <TextBox label={'녹음한 내용'}>{recordDetail.transcript}</TextBox>
       </div>
     </>
   );
