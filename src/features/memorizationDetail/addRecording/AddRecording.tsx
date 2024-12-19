@@ -1,20 +1,37 @@
+import { useQueryClient } from '@tanstack/react-query';
+
+import { recordQueryKeys } from '@/entities/memorizationDetail/queries';
+import type { RecordDto } from '@/entities/memorizationDetail/types/memorizationDetail.dto';
 import { useCreateRecordMutation } from '@/features/memorizationDetail/addRecording/hooks/useCreateRecordMutation';
 import { useRecording } from '@/features/memorizationDetail/addRecording/hooks/useRecording';
 import { RecordingButton } from '@/features/memorizationDetail/addRecording/ui/RecordingButton';
 import { Route as MemorizationDetailRoute } from '@/routes/memorization/$memorizationId';
 
 export function AddRecording() {
+  const queryClient = useQueryClient();
   const { memorizationId } = MemorizationDetailRoute.useParams();
-  const { mutate: createRecord } = useCreateRecordMutation();
+  const { mutate: createRecordMutation } = useCreateRecordMutation();
   const { speechRecognition, isRecordingMode, handler } = useRecording();
 
+  const recordList = queryClient.getQueryData<RecordDto[]>(recordQueryKeys.list(memorizationId).queryKey) ?? [];
+
   const saveRecording = () => {
-    createRecord({
+    const nextCount = recordList.length + 1;
+    createRecordMutation({
       memorizationId,
-      title: 'test', // TODO: 모달로 녹음 제목 설정
+      title: `녹음 ${nextCount}`,
       transcript: speechRecognition.transcript,
+    }, {
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: recordQueryKeys.list(memorizationId).queryKey,
+        });
+        alert('녹음 저장 완료');
+      },
+      onSettled: () => {
+        handler.cancelRecording();
+      },
     });
-    handler.cancelRecording();
   };
 
   if (!speechRecognition.browserSupportsSpeechRecognition) {
