@@ -17,21 +17,30 @@ export function AddRecording() {
 
   const saveRecording = () => {
     const nextCount = recordList.length + 1;
-    createRecordMutation({
-      memorizationId,
-      title: `녹음 ${nextCount}`,
-      transcript: speechRecognition.transcript,
-    }, {
-      onSuccess: () => {
-        queryClient.invalidateQueries({
-          queryKey: recordQueryKeys.list(memorizationId).queryKey,
-        });
-        alert('녹음 저장 완료');
+    const isTranscriptEmpty = speechRecognition.transcript.trim() === '';
+
+    if (isTranscriptEmpty) {
+      return alert('녹음 내용이 없습니다.');
+    }
+
+    createRecordMutation(
+      {
+        memorizationId,
+        title: `녹음 ${nextCount}`,
+        transcript: speechRecognition.transcript,
       },
-      onSettled: () => {
-        handler.cancelRecording();
-      },
-    });
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries({
+            queryKey: recordQueryKeys.list(memorizationId).queryKey,
+          });
+          alert('녹음 저장 완료');
+        },
+        onSettled: () => {
+          handler.cancelRecording();
+        },
+      }
+    );
   };
 
   if (!speechRecognition.browserSupportsSpeechRecognition) {
@@ -40,7 +49,6 @@ export function AddRecording() {
 
   return (
     <div className={'fixed bottom-10 right-5'}>
-      {speechRecognition.transcript}
       <RecordingButton
         onStart={handler.startRecording}
         onPause={handler.pauseRecording}
