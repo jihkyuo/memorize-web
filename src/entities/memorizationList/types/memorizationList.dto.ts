@@ -10,3 +10,8 @@ export interface UpdateIsMemorizedBodyDto {
   id: number
   isMemorized: boolean
 }
+
+export interface AddMemorizationBodyDto {
+  title: string
+  mainText: string
+}
